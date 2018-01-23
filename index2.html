@@ -1,0 +1,67 @@
+<!-- Christopher Hochgesang map; goes somehwere in greenland
+Map part/day2
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="map" style="width:400px;height:400px;background:yellow"></div>
+  <script>
+  var z=0;
+  function myMap(lat,long) {
+    if (lat == null){
+    lat = 70.5
+    }
+  if (long == null){
+    long=-35.2
+  }
+    var mapCanvas = document.getElementById("map");
+    var mapOptions = {
+      center: new google.maps.LatLng(lat,long), zoom: 10
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+  }
+  function getMap(place){
+
+     if(place.value == "fishers"){
+       myMap(39.9568,-86.0134)
+     }
+     if(place.value == "heidelberg"){
+       myMap(49.3988,8.6724)
+       document.getElementById("test").innerHTML="test2"
+     }
+     if(place.value == "kaiserslautern"){
+       myMap(49.4401,7.7491)
+     }
+     if(place.value == "seoul"){
+       myMap(37.5665,126.9780)
+     }
+     if(place.value == "random"){
+       z = 0;
+       var x=setInterval(yeet,2000)
+       function yeet(){
+         var ranL = Math.random() *50;
+         var ranL2 = Math.random() *50;
+         console.log(ranL + "  ,  " + ranL2)
+         myMap(ranL,ranL2)
+         z= z+1;
+         if(z === 5){
+           clearInterval(x);
+         }
+       }
+     }
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD33eCYc2yb4PpmPhCrad37IzqmpjIO8dE&callback=myMap"></script>
+  <div id="box1">
+    <select onchange="getMap(this)">
+      <option value="fishers">Fishers</option>
+      <option value="heidelberg">Heidelberg</option>
+      <option value="kaiserslautern">Kaiserslautern</option>
+      <option value="seoul">Seoul</option>
+      <option value="random">Random</option>
+    </select>
+  </div>
+<p id="test">test1</p>
